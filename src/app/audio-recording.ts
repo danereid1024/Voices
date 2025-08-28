@@ -42,7 +42,7 @@ export class AudioRecording {
     .getUserMedia({ audio:true })
     .then(s => {
       this.stream = s;
-      this.recorder();
+      this.record();
     })
     .catch(error => {
       this._recordingFailed.next('Recording failed');
