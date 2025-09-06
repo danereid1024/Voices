@@ -5,32 +5,22 @@
     </ion-toolbar>
   </ion-header>
 
+<!-- src/app/voice-timeline/voice-timeline.component.html -->
 <div>
-  <!-- Show Record button when not recording and no blob -->
-  @if (!isRecording && !blobUrl) {
-    <ion-button (click)="startRecording()">
-      Record
-    </ion-button>
-  }
+  <h2>🎙 Voice Timeline</h2>
 
-  <!-- Show Stop button when recording -->
-  @if (isRecording && !blobUrl) {
-    <ion-button (click)="stopRecording()">
-      Stop
-    </ion-button>
-  }
+  <button (click)="startRecording()" [disabled]="recorderService.isRecording">
+    Start Recording
+  </button>
+  <button (click)="stopRecording()" [disabled]="!recorderService.isRecording">
+    Stop Recording
+  </button>
 
-  <!-- Show playback when done recording -->
-  @if (isRecording && blobUrl) {
-    <div>{{ recordedTime }}</div>
-
+ <h3>Timeline</h3>
+  @for (post of posts; track post) {
+    <div>
+      <audio [src]="post" controls></audio>
+    </div>
   }
-  <div>
-  @if (!isRecording && blobUrl) {
-    <audio controls>
-      <source [src]="blobUrl" type="audio/webm" />
-    </audio>
-  }
-</div>
 </div>
 </ion-content>
