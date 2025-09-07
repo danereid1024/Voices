@@ -7,20 +7,25 @@
 
 <!-- src/app/voice-timeline/voice-timeline.component.html -->
 <div>
-  <h2>🎙 Voice Timeline</h2>
+  <h2>Voice Timeline</h2>
 
-  <button (click)="startRecording()" [disabled]="recorderService.isRecording">
+  <ion-button (click)="startRecording()" [disabled]="recorderService.isRecording">
     Start Recording
-  </button>
-  <button (click)="stopRecording()" [disabled]="!recorderService.isRecording">
+  </ion-button>
+  <ion-button (click)="stopRecording()" [disabled]="!recorderService.isRecording">
     Stop Recording
-  </button>
+  </ion-button>
 
  <h3>Timeline</h3>
-  @for (post of posts; track post) {
+  @for (post of posts; let i = $index; track post) {
     <div>
+      <ion-range >
       <audio [src]="post" controls></audio>
+      </ion-range>
     </div>
+    <ion-button (click)="playRecording(i)">
+        Play Recording
+      </ion-button>
   }
 </div>
 </ion-content>

@@ -1,12 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonButton, IonRange } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { AudioRecording } from '../audio-recording';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [
+  imports: [IonRange,
     IonHeader,
     IonToolbar,
     IonTitle,
@@ -26,5 +26,11 @@ export class Tab2Page {
   async stopRecording() {
     const audioUrl = await this.recorderService.stopRecording();
     this.posts.unshift(audioUrl); // add to top of timeline
+  }
+
+  playRecording(index: number) {
+    const audioUrl = this.posts[index];
+    const audio = new Audio(audioUrl);
+    audio.play();
   }
 }
